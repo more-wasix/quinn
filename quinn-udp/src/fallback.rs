@@ -4,7 +4,7 @@ use std::{
     time::Instant,
 };
 
-use proto::Transmit;
+use super::Transmit;
 
 use super::{log_sendmsg_error, RecvMeta, UdpSockRef, UdpState, IO_ERROR_LOG_INTERVAL};
 
@@ -103,6 +103,8 @@ pub(crate) fn udp_state() -> super::UdpState {
     super::UdpState {
         max_gso_segments: std::sync::atomic::AtomicUsize::new(1),
         gro_segments: 1,
+        #[cfg(not(windows))]
+        sendmsg_einval: std::sync::atomic::AtomicBool::new(false),
     }
 }
 

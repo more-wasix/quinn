@@ -4,6 +4,8 @@
 
 #[cfg(unix)]
 use std::os::unix::io::AsFd;
+#[cfg(target_os = "wasi")]
+use std::os::wasi::io::AsFd;
 #[cfg(windows)]
 use std::os::windows::io::AsSocket;
 #[cfg(not(windows))]
@@ -176,7 +178,7 @@ fn log_sendmsg_error(
 // Wrapper around socket2 to avoid making it a public dependency and incurring stability risk
 pub struct UdpSockRef<'a>(socket2::SockRef<'a>);
 
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "wasi"))]
 impl<'s, S> From<&'s S> for UdpSockRef<'s>
 where
     S: AsFd,

@@ -8,3 +8,18 @@ debug = true
 
 [profile.release]
 debug = true
+
+#[workspace.dependencies]
+#socket2 = "=0.5.5"
+#ring = "=0.17.7"
+#libc = "=0.2.152"
+#rustix = "=0.38.31"
+#rcgen = "0.12"
+
+[patch.crates-io]
+tokio = { git = "https://github.com/wasix-org/tokio.git", branch = "wasix-1.35.1" }
+socket2 = { git = "https://github.com/wasix-org/socket2.git", branch = "v0.5.5" }
+rustls-native-certs = { git = "https://github.com/wasix-org/rustls-native-certs.git" }
+ring = { git = "https://github.com/wasix-org/ring.git", branch = "0.17.7" }
+libc = { git = "https://github.com/wasix-org/libc.git", branch = "v0.2.152" }
+rustls = { git = "https://github.com/wasix-org/rustls.git", branch = "v0.21.5" }
